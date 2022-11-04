@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ film_detail.title }}</title>
-</head>
-<body>
-<a href="/films/">
-    <button>Back</button>
-</a>
-<h1>film detail</h1>
-<h3>Title: {{ film_detail.title }}</h3>
-<p>Producer: {{ film_detail.regiser }}</p>
-<p>Rating: {{ film_detail.rating }}</p>
-<p>dlitelnost: {{ film_detail.dlitelnost }}</p>
-<p>creted at: {{ film_detail.created }}</p>
-<hr>
+{% extends 'base.html' %}
+{% block content %}
+    <a href="/films/">
+        <button>Back</button>
+    </a>
+    <h1>film detail</h1>
+    <h3>Title: {{ film_detail.title }}</h3>
+    <p>Producer: {{ film_detail.regiser }}</p>
+    <p>Rating: {{ film_detail.rating }}</p>
+    <p>dlitelnost: {{ film_detail.dlitelnost }}</p>
+    <p>creted at: {{ film_detail.created }}</p>
+    <hr>
 
-<h3>Directors:</h3>
-{% for director in directors %}
-    <a> href="#"{{director.name}}</a>
+    <h3>Directors:</h3>
+    {% for director in directors %}
+        <a> {{director.name}}</a>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

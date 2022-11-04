@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Film list</title>
-</head>
+{% extends 'base.html' %}
+{% block content %}
 <h1>All films</h1>
 {% for film in film_list %}
     <a href="/films/{{ film.id }}/">
@@ -13,5 +9,4 @@
     <p>Rating: {{ film.rating }}</p>
     <hr>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

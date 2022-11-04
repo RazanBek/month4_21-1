@@ -1,6 +1,35 @@
-from django.shortcuts import render, Http404
+from django.shortcuts import render, Http404, redirect
 from datetime import datetime
 from .models import Film, Director
+from .forms import FilmForm, DirectorForm
+
+
+def film_create_view(request):
+    context = {
+        'form': FilmForm()
+    }
+    if request.method == 'POST':
+        form = FilmForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/films/')
+        else:
+            context['form'] = form
+    return render(request, 'create_film.html', context)
+
+
+def director_create_view(request):
+    context = {
+        'form': DirectorForm()
+    }
+    if request.method == 'POST':
+        form = DirectorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/films/')
+        else:
+            context['form'] = form
+    return render(request, 'create_director.html', context)
 
 
 def date_now_view(request):
@@ -23,6 +52,13 @@ def films_list_view(request):
         'film_list': Film.objects.all()
     }
     return render(request, 'films.html', context=dict_)
+
+
+def director_list_view(request):
+    dict_ = {
+        'director_list': Director.objects.all()
+    }
+    return render(request, 'director.html', context=dict_)
 
 
 def film_detail_view(request, id):
