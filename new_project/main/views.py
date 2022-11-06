@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 def logout_view(request):
     logout(request)
     return redirect('/films/')
+
+
 def login_view(request):
     context = {
         'form': UserLoginForm()
