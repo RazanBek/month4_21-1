@@ -26,5 +26,8 @@ urlpatterns = [
     path('directors/', views.director_list_view),
     path('director/<int:director_id>/films/', views.director_films_view),
     path('films/create/', views.film_create_view),
-    path('director/create/', views.director_create_view)
+    path('director/create/', views.director_create_view),
+    path('register/', views.register_view),
+    path('login/', views.login_view),
+    path('logout/', views.logout_view),
 ]
