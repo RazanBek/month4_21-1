@@ -85,9 +85,24 @@ def about_us_view(request):
     return render(request, 'about_us.html')
 
 
+PAGE_SIZE = 3
+
+
 def films_list_view(request):
+    page = int(request.GET.get('page', 1))
+    all_film = Film.objects.all()
+    films = all_film[(page - 1) * PAGE_SIZE: page * PAGE_SIZE]
+    film_list = all_film[PAGE_SIZE * (page - 1): PAGE_SIZE * page]
+    total = all_film.count()
+    pages_amount = total // PAGE_SIZE + 1 if total % PAGE_SIZE == 0 else total // PAGE_SIZE + 1
     dict_ = {
-        'film_list': Film.objects.all()
+        'film_list': film_list,
+        'buttons': [i for i in range(1, pages_amount + 1)],
+        'page': page,
+        'prev_page': page - 1,
+        'next_page': page + 1,
+        'pages': (total + PAGE_SIZE - 1) // PAGE_SIZE,
+        'films': films
     }
     return render(request, 'films.html', context=dict_)
 
@@ -119,3 +134,12 @@ def director_films_view(request, director_id):
         'director': director
     }
     return render(request, 'director_films.html', context=context)
+
+
+def search_view(request):
+    search_word = request.GET.get('search_word', '')
+    context = {
+        'films': Film.objects.filter(title__icontains=search_word),
+        'search_word': search_word
+    }
+    return render(request, 'search.html', context)

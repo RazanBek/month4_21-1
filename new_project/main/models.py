@@ -11,6 +11,8 @@ class Director(models.Model):
 
 
 class Film(models.Model):
+    class Meta:
+        ordering = ['-rating', 'title', 'updated']
     director = models.ForeignKey(Director, on_delete=models.PROTECT, related_name="directors", null=True)
     title = models.CharField(max_length=100, default="no name")
     regiser = models.CharField(max_length=150)
