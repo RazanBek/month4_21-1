@@ -99,7 +99,7 @@ def films_list_view(request):
     pages_amount = total // PAGE_SIZE + 1 if total % PAGE_SIZE == 0 else total // PAGE_SIZE + 1
     dict_ = {
         'film_list': film_list,
-        'buttons': [i for i in range(1, pages_amount + 1)],
+        'buttons': [i for i in range(1, pages_amount)],
         'page': page,
         'prev_page': page - 1,
         'next_page': page + 1,
